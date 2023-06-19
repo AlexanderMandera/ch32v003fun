@@ -597,9 +597,9 @@ keep_going:
 				usleep(20000);
 				fprintf(stderr, "post usleep\n");
 
-				if( MCF.WriteBinaryBlob )
+				if( MCF.WriteBinaryBlobForFlashing )
 				{
-					if( MCF.WriteBinaryBlob( dev, offset, len, image ) )
+					if( MCF.WriteBinaryBlobForFlashing( dev, offset, len, image ) )
 					{
 						fprintf( stderr, "Error: Fault writing image.\n" );
 						return -13;
@@ -2002,7 +2002,7 @@ int DefaultVoidHighLevelState( void * dev )
 	return 0;
 }
 
-int DefaultCheckImageSize( int size )
+int DefaultCheckImageSize( void * dev, int size )
 {
 	// TODO: Replace with low-level implementation
 	return size < 16384;
@@ -2020,6 +2020,8 @@ int SetupAutomaticHighLevelFunctions( void * dev )
 		MCF.SetupInterface = DefaultSetupInterface;
 	if( !MCF.WriteBinaryBlob )
 		MCF.WriteBinaryBlob = DefaultWriteBinaryBlob;
+	if( !MCF.WriteBinaryBlobForFlashing )
+		MCF.WriteBinaryBlobForFlashing = MCF.WriteBinaryBlob;
 	if( !MCF.ReadBinaryBlob )
 		MCF.ReadBinaryBlob = DefaultReadBinaryBlob;
 	if( !MCF.WriteWord )

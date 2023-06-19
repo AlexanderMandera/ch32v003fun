@@ -251,7 +251,7 @@ static int LESetupInterface( void * d )
 	if( target_chip_type == 0x307 || target_chip_type == 0x203 )
 	{
 		fprintf( stderr, "CH32V307 or CH32V203 Detected.  Allowing old-flash-mode for operation.\n" );
-		MCF.WriteBinaryBlob = LEWriteBinaryBlob;
+		MCF.WriteBinaryBlobForFlashing = LEWriteBinaryBlob;
 
 		wch_link_command( dev, "\x81\x0d\x01\x03", 4, (int*)&transferred, rbuff, 1024 ); // Reply: Ignored, 820d050900300500
 	}

@@ -29,6 +29,7 @@ struct MiniChlinkFunctions
 
 	// No boundary or limit rules.  Must support any combination of alignment and size.
 	int (*WriteBinaryBlob)( void * dev, uint32_t address_to_write, uint32_t blob_size, uint8_t * blob );
+	int (*WriteBinaryBlobForFlashing)( void * dev, uint32_t address_to_write, uint32_t blob_size, uint8_t * blob );
 	int (*ReadBinaryBlob)( void * dev, uint32_t address_to_read_from, uint32_t read_size, uint8_t * blob );
 
 	int (*Erase)( void * dev, uint32_t address, uint32_t length, int type ); //type = 0 for fast, 1 for whole-chip
