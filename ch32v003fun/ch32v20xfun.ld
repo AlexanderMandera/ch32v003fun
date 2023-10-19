@@ -10,12 +10,12 @@ MEMORY
 
 	FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 64K
 	RAM (xrw) : ORIGIN = 0x20000000, LENGTH = 20K
-
+ 
 #elif MCU_PACKAGE == 2
 
     FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 32K
     RAM (xrw) : ORIGIN = 0x20000000, LENGTH = 10K
-
+sdklfjds ksdlf ds= s dfdsf s
 #elif MCU_PACKAGE == 3
 
     FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 128K
