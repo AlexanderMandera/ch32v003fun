@@ -43,7 +43,9 @@ void * MiniCHLinkInitAsDLL( struct MiniChlinkFunctions ** MCFO, const init_hints
 		else if( strcmp( specpgm, "b003boot" ) == 0 )
 			dev = TryInit_B003Fun();
 		else if( strcmp( specpgm, "ardulink" ) == 0 )
-			dev = TryInit_B003Fun();
+			dev = TryInit_Ardulink(init_hints);
+		else if( strcmp( specpgm, "uartboot" ) == 0 )
+			dev = TryInit_UARTBoot(init_hints);
 	}
 	else
 	{
@@ -66,6 +68,10 @@ void * MiniCHLinkInitAsDLL( struct MiniChlinkFunctions ** MCFO, const init_hints
 		else if ( init_hints->serial_port && (dev = TryInit_Ardulink(init_hints)))
 		{
 			fprintf( stderr, "Found Ardulink Programmer\n" );
+		}
+		else if ( init_hints->serial_port && (dev = TryInit_UARTBoot(init_hints)))
+		{
+			fprintf( stderr, "Found WCH UART Bootloader\n" );
 		}
 	}
 
@@ -114,7 +120,7 @@ int main( int argc, char ** argv )
 			if( i < argc )
 				hints.serial_port = argv[i];
 		}
-		else if( strncmp( v, "-c", 2 ) == 0 )
+		else if( strncmp( v, "-C", 2 ) == 0 )
 		{
 			i++;
 			if( i < argc )
@@ -649,6 +655,7 @@ help:
 	fprintf( stderr, " -t Disable 3.3V\n" );
 	fprintf( stderr, " -f Disable 5V\n" );
 	fprintf( stderr, " -c [serial port for Ardulink, try /dev/ttyACM0 or COM11 etc]\n" );
+	fprintf( stderr, " -C [specific programmer, like linke, ardulink or uartboot]\n" );
 	fprintf( stderr, " -u Clear all code flash - by power off (also can unbrick)\n" );
 	fprintf( stderr, " -E Erase chip\n" );
 	fprintf( stderr, " -b Reboot out of Halt\n" );
